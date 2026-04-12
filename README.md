@@ -1,4 +1,4 @@
 # Tempo Justo APP
 
-![Logo do projeto](./assets/logo.png)
+![Logo do projeto](./public/logo.png)
 
