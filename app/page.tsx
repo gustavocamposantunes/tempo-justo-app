@@ -27,7 +27,7 @@ export default function LoginPage() {
                 <h1 className="font-heading text-4xl uppercase tracking-tight sm:text-5xl">
                   Tempo <strong className="text-brand-secondary">Justo</strong>
                 </h1>
-                <h6 className="mt-2 text-sm font-medium uppercase tracking-[0.25em] text-white/85">
+                <h6 className="mt-2 text-sm font-medium uppercase tracking-[0.25em] text-white">
                   banco de tempo online
                 </h6>
               </div>
@@ -53,7 +53,7 @@ export default function LoginPage() {
                   type="email"
                   id="email"
                   name="email"
-                  className="h-12 border-slate-200 bg-brand-ice/70 px-4 text-base shadow-sm placeholder:text-slate-400"
+                  className="h-12 rounded-none border-slate-200 bg-brand-ice/70 px-4 text-base shadow-sm placeholder:text-slate-400"
                   placeholder="voce@exemplo.com"
                 />
               </Field>
@@ -71,12 +71,12 @@ export default function LoginPage() {
                   type="password"
                   id="password"
                   name="password"
-                  className="h-12 border-slate-200 bg-brand-ice/70 px-4 text-base shadow-sm placeholder:text-slate-400"
+                  className="h-12 rounded-none border-slate-200 bg-brand-ice/70 px-4 text-base shadow-sm placeholder:text-slate-400"
                   placeholder="••••••••"
                 />
               </Field>
 
-              <Button type="submit" className="h-12 w-full text-base font-semibold shadow-lg shadow-brand-action/20 transition-transform duration-200 hover:-translate-y-0.5">
+              <Button type="submit" className="h-12 w-full rounded-none text-base font-semibold shadow-lg shadow-brand-action/20 transition-transform duration-200 hover:-translate-y-0.5">
                 Entrar
                 <ArrowRight className="size-4" />
               </Button>
