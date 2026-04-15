@@ -38,7 +38,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="relative z-10 -mt-8 mx-4 rounded-3xl bg-white px-6 py-8 shadow-2xl shadow-slate-900/10 ring-1 ring-black/5 sm:mx-6 sm:px-8 lg:mx-0 lg:mt-0 lg:rounded-none lg:px-10 lg:py-10 lg:shadow-none lg:ring-0">
+          <div className="relative z-10 -mt-8 mx-4 rounded-none bg-white px-6 py-8 shadow-2xl shadow-slate-900/10 ring-1 ring-black/5 sm:mx-6 sm:px-8 lg:mx-0 lg:mt-0 lg:rounded-none lg:px-10 lg:py-10 lg:shadow-none lg:ring-0">
             <div className="mb-6">
               <h2 className="text-2xl font-semibold tracking-tight text-brand-text">Acesse sua conta</h2>
               <p className="mt-1 text-sm text-slate-500">Conecte-se para continuar sua jornada de colaboração.</p>
