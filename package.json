@@ -10,7 +10,9 @@
     "test:coverage": "vitest --run --coverage",
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
-    "prepare": "if [ -n \"$CI\" ] || [ -n \"$VERCEL\" ]; then exit 0; fi; husky"
+    "prepare": "if [ -n \"$CI\" ] || [ -n \"$VERCEL\" ]; then exit 0; fi; husky",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
@@ -44,6 +46,10 @@
     "lint-staged": "^16.4.0",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.4",
+    "storybook": "^10.3.5",
+    "@storybook/nextjs-vite": "^10.3.5",
+    "vite": "^8.0.8",
+    "eslint-plugin-storybook": "^10.3.5"
   }
 }
