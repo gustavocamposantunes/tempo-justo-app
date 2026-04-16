@@ -21,13 +21,13 @@ export default function LoginPage() {
             <div className="relative flex h-full min-h-90 flex-col justify-between px-6 pt-10 pb-14 sm:px-8 lg:px-10">
               <div className="flex flex-1 flex-col items-center justify-center text-center">
                 <div className="mb-5 inline-flex rounded-2xl bg-white/10 p-3 backdrop-blur-sm">
-                  <Image src="/logo.svg" alt="Logo" width={78} height={78} className="drop-shadow-sm" />
+                  <Image src="/logo.svg" alt="Logo" width={78} height={78} className="drop-shadow-sm lg:size-24" />
                 </div>
 
-                <h1 className="font-heading text-4xl uppercase tracking-tight sm:text-5xl">
+                <h1 className="font-heading text-4xl uppercase tracking-tight sm:text-5xl lg:text-6xl">
                   Tempo <strong className="text-brand-secondary">Justo</strong>
                 </h1>
-                <h6 className="mt-2 text-sm font-medium uppercase tracking-[0.25em] text-white">
+                <h6 className="mt-2 text-sm font-medium uppercase tracking-[0.25em] text-white lg:text-base lg:tracking-[0.3em]">
                   banco de tempo online
                 </h6>
               </div>
