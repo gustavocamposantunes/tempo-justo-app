@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "vitest",
+    "test:coverage": "vitest --run --coverage",
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
     "prepare": "if [ -n \"$CI\" ] || [ -n \"$VERCEL\" ]; then exit 0; fi; husky"
