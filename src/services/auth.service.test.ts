@@ -1,15 +1,25 @@
-import axios from "axios";
+import { isAxiosError } from "axios";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import { InvalidCredentialsError, InternalServerError } from "@/lib/errors";
 
 import { loginUser, LoginRequest } from "./auth.service";
+import { httpClient } from "../lib/http";
 
 import type { AxiosError } from "axios";
 
-vi.mock("axios");
+vi.mock("axios", () => ({
+  isAxiosError: vi.fn(),
+}));
 
-const mockedAxios = vi.mocked(axios);
+vi.mock("../lib/http", () => ({
+  httpClient: {
+    post: vi.fn(),
+  },
+}));
+
+const mockedIsAxiosError = vi.mocked(isAxiosError);
+const mockedHttpClient = vi.mocked(httpClient);
 
 describe("auth.service", () => {
   beforeEach(() => {
@@ -25,9 +35,8 @@ describe("auth.service", () => {
     const mockError = new Error("Unauthorized") as AxiosError;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mockError.response = { status: 401 } as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockedAxios.isAxiosError = vi.fn().mockReturnValue(true) as any;
-    mockedAxios.post.mockRejectedValue(mockError);
+    mockedIsAxiosError.mockReturnValue(true);
+    mockedHttpClient.post.mockRejectedValue(mockError);
 
     await expect(loginUser(credentials)).rejects.toThrow(InvalidCredentialsError);
   });
@@ -44,9 +53,8 @@ describe("auth.service", () => {
       status: 500,
       data: { message: "Database connection failed" },
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockedAxios.isAxiosError = vi.fn().mockReturnValue(true) as any;
-    mockedAxios.post.mockRejectedValue(mockError);
+    mockedIsAxiosError.mockReturnValue(true);
+    mockedHttpClient.post.mockRejectedValue(mockError);
 
     await expect(loginUser(credentials)).rejects.toThrow(InternalServerError);
   });
@@ -60,9 +68,8 @@ describe("auth.service", () => {
     const mockError = new Error("Server Error") as AxiosError;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mockError.response = { status: 500, data: {} } as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockedAxios.isAxiosError = vi.fn().mockReturnValue(true) as any;
-    mockedAxios.post.mockRejectedValue(mockError);
+    mockedIsAxiosError.mockReturnValue(true);
+    mockedHttpClient.post.mockRejectedValue(mockError);
 
     await expect(loginUser(credentials)).rejects.toThrow("Erro ao fazer o login");
   });
@@ -74,9 +81,8 @@ describe("auth.service", () => {
     };
 
     const mockError = new Error("Network error");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockedAxios.isAxiosError = vi.fn().mockReturnValue(false) as any;
-    mockedAxios.post.mockRejectedValue(mockError);
+    mockedIsAxiosError.mockReturnValue(false);
+    mockedHttpClient.post.mockRejectedValue(mockError);
 
     await expect(loginUser(credentials)).rejects.toThrow("Network error");
   });
@@ -98,11 +104,14 @@ describe("auth.service", () => {
       },
     };
 
-    mockedAxios.post.mockResolvedValue(mockResponse);
+    mockedHttpClient.post.mockResolvedValue(mockResponse);
 
     const result = await loginUser(credentials);
 
-    expect(mockedAxios.post).toHaveBeenCalledWith("/api/auth/login", credentials);
+    expect(mockedHttpClient.post).toHaveBeenCalledWith(
+      "/api/auth/login",
+      credentials
+    );
     expect(result).toEqual(mockResponse.data);
   });
 });
