@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
 import { EmailField } from "@/components/molecules/email-field";
+import { loginSchema, type LoginFormData } from "@/lib/schemas/login";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -16,10 +18,12 @@ const meta = {
   },
   decorators: [
     (Story) => {
-      const methods = useForm({
+      const methods = useForm<LoginFormData>({
         defaultValues: {
           email: "",
+          password: "",
         },
+        resolver: zodResolver(loginSchema as never),
       });
 
       return (
@@ -51,11 +55,13 @@ function EmailFieldWithError() {
 export const WithError: Story = {
   decorators: [
     () => {
-      const methods = useForm({
+      const methods = useForm<LoginFormData>({
         defaultValues: {
           email: "invalid-email", // Invalid email format to trigger validation
+          password: "123456",
         },
         mode: "onChange",
+        resolver: zodResolver(loginSchema as never),
       });
 
       return (
@@ -72,10 +78,12 @@ export const WithError: Story = {
 export const WithValue: Story = {
   decorators: [
     (Story) => {
-      const methods = useForm({
+      const methods = useForm<LoginFormData>({
         defaultValues: {
           email: "user@example.com",
+          password: "123456",
         },
+        resolver: zodResolver(loginSchema as never),
       });
 
       return (

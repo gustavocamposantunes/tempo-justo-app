@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
 import { PasswordField } from "@/components/molecules/password-field";
+import { loginSchema, type LoginFormData } from "@/lib/schemas/login";
 
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
@@ -16,10 +18,12 @@ const meta = {
   },
   decorators: [
     (Story) => {
-      const methods = useForm({
+      const methods = useForm<LoginFormData>({
         defaultValues: {
           password: "",
+          email: "",
         },
+        resolver: zodResolver(loginSchema as never),
       });
 
       return (
@@ -51,11 +55,13 @@ function PasswordFieldWithError() {
 export const WithError: Story = {
   decorators: [
     () => {
-      const methods = useForm({
+      const methods = useForm<LoginFormData>({
         defaultValues: {
           password: "123", // Too short (less than 6 chars) to trigger validation
+          email: "user@example.com",
         },
         mode: "onChange",
+        resolver: zodResolver(loginSchema as never),
       });
 
       return (
