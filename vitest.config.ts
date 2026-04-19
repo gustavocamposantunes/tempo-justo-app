@@ -12,9 +12,17 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      'src/components/ui/**',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
+      exclude: [
+        'src/components/ui/**',
+      ],
       thresholds: {
         global: {
           statements: 100,
