@@ -23,7 +23,7 @@ export const loginUser = async (
 ): Promise<LoginResponse> => {
   try {
     const response = await httpClient.post<LoginResponse>(
-      "/api/auth/login",
+      "/auth/login",
       credentials
     );
     return response.data;
