@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowRight } from "lucide-react"
+import { useCookies } from 'react-cookie';
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
 import { LoginFormHeading } from "@/components/atoms/login-form-heading";
@@ -19,14 +20,15 @@ export function LoginFormCard() {
   });
 
   const loginMutation = useLogin();
+  const [, setCookie] = useCookies(['tempo-justo-token', 'tempo-justo-user']);
 
   const onSubmit: SubmitHandler<LoginFormData> = (data) => {
     loginMutation.reset();
 
     loginMutation.mutate(data, {
       onSuccess: (response) => {
-        window.localStorage.setItem("tempo-justo-token", response.token);
-        window.localStorage.setItem("tempo-justo-user", JSON.stringify(response.user));
+        setCookie('tempo-justo-token', response.token, { path: '/' });
+        setCookie('tempo-justo-user', JSON.stringify(response.user), { path: '/' });
       },
     });
   };
