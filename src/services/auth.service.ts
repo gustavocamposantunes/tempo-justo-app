@@ -1,6 +1,8 @@
-import axios from "axios";
+import { isAxiosError } from "axios";
 
 import { InvalidCredentialsError, InternalServerError } from "@/lib/errors";
+
+import { httpClient } from "../lib/http";
 
 export interface LoginRequest {
   email: string;
@@ -20,10 +22,13 @@ export const loginUser = async (
   credentials: LoginRequest
 ): Promise<LoginResponse> => {
   try {
-    const response = await axios.post<LoginResponse>("/api/auth/login", credentials);
+    const response = await httpClient.post<LoginResponse>(
+      "/api/auth/login",
+      credentials
+    );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
+    if (isAxiosError(error)) {
       if (error.response?.status === 401) {
         throw new InvalidCredentialsError();
       }
