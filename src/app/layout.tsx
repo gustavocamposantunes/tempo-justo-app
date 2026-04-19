@@ -1,9 +1,12 @@
 import { Inter, Manrope, Geist } from "next/font/google";
 
+import { cn } from "@/lib/utils";
+
 import "./globals.css";
+import { Providers } from "./providers";
 
 import type { Metadata } from "next";
-import { cn } from "@/lib/utils";
+
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -32,7 +35,9 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", inter.variable, manrope.variable, "font-sans", geist.variable)}
     >
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
