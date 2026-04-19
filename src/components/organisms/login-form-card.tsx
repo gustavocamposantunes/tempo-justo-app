@@ -1,5 +1,6 @@
 "use client"
 
+import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowRight } from "lucide-react"
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
@@ -8,15 +9,12 @@ import { EmailField } from "@/components/molecules/email-field";
 import { PasswordField } from "@/components/molecules/password-field";
 import { SignUpPrompt } from "@/components/molecules/sign-up-prompt";
 import { Button } from "@/components/ui/button";
-
-interface LoginFormData {
-  email: string;
-  password: string;
-}
+import { loginSchema, type LoginFormData } from "@/lib/schemas/login";
 
 export function LoginFormCard() {
   const methods = useForm<LoginFormData>({
     mode: "onBlur",
+    resolver: zodResolver(loginSchema as never),
   });
 
   const onSubmit: SubmitHandler<LoginFormData> = (data) => {
