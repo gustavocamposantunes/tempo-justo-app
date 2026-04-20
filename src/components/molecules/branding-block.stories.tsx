@@ -14,7 +14,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="min-h-105 p-10 text-white">
+      <div className="min-h-105 bg-brand-primary p-10 text-white">
         <Story />
       </div>
     ),
