@@ -5,6 +5,13 @@ export class InvalidCredentialsError extends Error {
   }
 }
 
+export class UserAlreadyExistsError extends Error {
+  constructor(message: string = "E-mail já cadastrado") {
+    super(message);
+    this.name = "UserAlreadyExistsError";
+  }
+}
+
 export class InternalServerError extends Error {
   constructor(message: string = "Erro ao fazer o login") {
     super(message);
