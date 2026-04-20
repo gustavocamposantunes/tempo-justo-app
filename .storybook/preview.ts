@@ -18,6 +18,9 @@ const applyFontVariables: Decorator = (Story) => {
 const preview: Preview = {
   decorators: [applyFontVariables],
   parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,
