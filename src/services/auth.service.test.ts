@@ -1,9 +1,13 @@
 import { isAxiosError } from "axios";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-import { InvalidCredentialsError, InternalServerError } from "@/lib/errors";
+import {
+  InternalServerError,
+  InvalidCredentialsError,
+  UserAlreadyExistsError,
+} from "@/lib/errors";
 
-import { loginUser, LoginRequest } from "./auth.service";
+import { loginUser, LoginRequest, registerUser, RegisterUserRequest } from "./auth.service";
 import { httpClient } from "../lib/http";
 
 import type { AxiosError } from "axios";
@@ -109,9 +113,48 @@ describe("auth.service", () => {
     const result = await loginUser(credentials);
 
     expect(mockedHttpClient.post).toHaveBeenCalledWith(
-      "/api/auth/login",
+      "/auth/login",
       credentials
     );
+    expect(result).toEqual(mockResponse.data);
+  });
+
+  it("should throw UserAlreadyExistsError on 409 response while registering", async () => {
+    const userData: RegisterUserRequest = {
+      name: "John Doe",
+      email: "test@example.com",
+      password: "password123",
+    };
+
+    const mockError = new Error("Conflict") as AxiosError;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    mockError.response = { status: 409 } as any;
+    mockedIsAxiosError.mockReturnValue(true);
+    mockedHttpClient.post.mockRejectedValue(mockError);
+
+    await expect(registerUser(userData)).rejects.toThrow(UserAlreadyExistsError);
+  });
+
+  it("should return register response on successful registration", async () => {
+    const userData: RegisterUserRequest = {
+      name: "John Doe",
+      email: "test@example.com",
+      password: "password123",
+    };
+
+    const mockResponse = {
+      data: {
+        id: "user-123",
+        name: "John Doe",
+        email: "test@example.com",
+      },
+    };
+
+    mockedHttpClient.post.mockResolvedValue(mockResponse);
+
+    const result = await registerUser(userData);
+
+    expect(mockedHttpClient.post).toHaveBeenCalledWith("/auth/register", userData);
     expect(result).toEqual(mockResponse.data);
   });
 });
