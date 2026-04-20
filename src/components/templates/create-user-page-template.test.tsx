@@ -1,7 +1,22 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { CreateUserPageTemplate } from "@/components/templates/create-user-page-template";
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+  }),
+}));
+
+vi.mock("@/hooks/useRegisterUser", () => ({
+  useRegisterUser: () => ({
+    reset: vi.fn(),
+    mutate: vi.fn(),
+    isPending: false,
+    error: null,
+  }),
+}));
 
 describe("CreateUserPageTemplate", () => {
   it("should render hero section and create user form", () => {
