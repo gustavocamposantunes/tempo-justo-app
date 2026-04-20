@@ -1,9 +1,9 @@
 import { GraduationCap, HandCoins, HeartPulse, Utensils, Wrench } from "lucide-react";
 
-import { FeaturedCommunityCard } from "@/components/organisms/featured-community-card";
 import { IdeaPostCard } from "@/components/organisms/idea-post-card";
 import { IdeaSidebar } from "@/components/organisms/idea-sidebar";
 import { MarketplaceHeader } from "@/components/organisms/marketplace-header";
+import { VolunteerSwiperSection } from "@/components/organisms/volunteer-swiper-section";
 import { Button } from "@/components/ui/button";
 
 const categories = [
@@ -53,6 +53,60 @@ const ideaCards = [
   },
 ];
 
+const volunteerSlides = [
+  {
+    featured: {
+      title: "Mutirão de reconstrução comunitária",
+      description:
+        "Participe do nosso projeto de revitalização da Praça das Flores. Buscamos voluntários para pintura e jardinagem.",
+      rewardLabel: "5+",
+      participantsLabel: "+12 pessoas inscritas",
+    },
+    volunteer: {
+      title: ideaCards[3].title,
+      description: ideaCards[3].description,
+      tag: ideaCards[3].tag,
+      author: ideaCards[3].author,
+      timeLabel: ideaCards[3].timeLabel,
+      colorClassName: ideaCards[3].colorClassName,
+    },
+  },
+  {
+    featured: {
+      title: "Mutirão da praça do bairro",
+      description:
+        "Precisamos de voluntários para pequenos reparos, pintura e organização dos espaços de convivência.",
+      rewardLabel: "4+",
+      participantsLabel: "+9 pessoas inscritas",
+    },
+    volunteer: {
+      title: "Apoio em manutenção",
+      description: "Suporte com ferramentas e cuidados básicos em estruturas comunitárias.",
+      tag: "Voluntariado",
+      author: "Paulo Mendes",
+      timeLabel: "2 horas",
+      colorClassName: "bg-[linear-gradient(135deg,#C7D8F8_0%,#A8C2F2_50%,#7FA7E7_100%)]",
+    },
+  },
+  {
+    featured: {
+      title: "Mutirão verde comunitário",
+      description:
+        "Ação para limpeza, plantio de mudas e fortalecimento da horta coletiva do bairro.",
+      rewardLabel: "6+",
+      participantsLabel: "+15 pessoas inscritas",
+    },
+    volunteer: {
+      title: "Oficina de compostagem",
+      description: "Aprenda práticas simples para reduzir resíduos e adubar hortas locais.",
+      tag: "Sustentabilidade",
+      author: "Marina Lopes",
+      timeLabel: "1.5 hora",
+      colorClassName: "bg-[linear-gradient(135deg,#A5D8A8_0%,#7BC47F_50%,#57A85D_100%)]",
+    },
+  },
+];
+
 export function IdeaBoardPageTemplate() {
   return (
     <main className="min-h-dvh bg-brand-ice pb-6">
@@ -98,24 +152,7 @@ export function IdeaBoardPageTemplate() {
             ))}
           </div>
 
-          <div className="grid gap-4 xl:grid-cols-[2fr_1fr]">
-            <FeaturedCommunityCard
-              description="Participe do nosso projeto de revitalização da Praça das Flores. Buscamos voluntários para pintura e jardinagem."
-              participantsLabel="+12 pessoas inscritas"
-              rewardLabel="5+"
-              title="Mutirão de reconstrução comunitária"
-            />
-
-            <IdeaPostCard
-              author={ideaCards[3].author}
-              colorClassName={ideaCards[3].colorClassName}
-              description={ideaCards[3].description}
-              showTimeIcon
-              tag={ideaCards[3].tag}
-              timeLabel={ideaCards[3].timeLabel}
-              title={ideaCards[3].title}
-            />
-          </div>
+          <VolunteerSwiperSection slides={volunteerSlides} />
         </section>
       </div>
     </main>

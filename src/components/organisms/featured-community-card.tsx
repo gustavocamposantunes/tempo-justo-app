@@ -14,14 +14,14 @@ export function FeaturedCommunityCard({
   participantsLabel,
 }: FeaturedCommunityCardProps) {
   return (
-    <article className="bg-[#8BB6FF] p-6 text-white shadow-sm">
+    <article className="flex h-full flex-col bg-[#8BB6FF] p-6 text-white shadow-sm">
       <div className="flex items-start justify-between gap-4">
         <div className="max-w-md space-y-3">
           <span className="inline-flex bg-white/20 px-3 py-1 text-[11px] font-semibold tracking-wide uppercase">
             Solidariedade
           </span>
           <h3 className="text-3xl leading-tight font-semibold">{title}</h3>
-          <p className="text-sm text-white/90 sm:text-base">{description}</p>
+          <p className="line-clamp-3 text-sm text-white/90 sm:text-base">{description}</p>
         </div>
 
         <div className="hidden bg-[#78A8F7] px-6 py-5 text-center lg:block">
@@ -30,7 +30,7 @@ export function FeaturedCommunityCard({
         </div>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-6">
         <p className="text-sm text-white/90">{participantsLabel}</p>
 
         <Button

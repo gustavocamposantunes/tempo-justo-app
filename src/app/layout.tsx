@@ -1,4 +1,5 @@
 import { Inter, Manrope, Geist } from "next/font/google";
+import "swiper/css";
 
 import { cn } from "@/lib/utils";
 
