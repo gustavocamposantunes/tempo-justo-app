@@ -1,6 +1,10 @@
 import { isAxiosError } from "axios";
 
-import { InvalidCredentialsError, InternalServerError } from "@/lib/errors";
+import {
+  InternalServerError,
+  InvalidCredentialsError,
+  UserAlreadyExistsError,
+} from "@/lib/errors";
 
 import { httpClient } from "../lib/http";
 
@@ -16,6 +20,18 @@ export interface LoginResponse {
     email: string;
     name: string;
   };
+}
+
+export interface RegisterUserRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface RegisterUserResponse {
+  id: string;
+  name: string;
+  email: string;
 }
 
 export const loginUser = async (
@@ -34,6 +50,31 @@ export const loginUser = async (
       }
       throw new InternalServerError(error.response?.data?.message || "Erro ao fazer o login");
     }
+    throw error;
+  }
+};
+
+export const registerUser = async (
+  userData: RegisterUserRequest
+): Promise<RegisterUserResponse> => {
+  try {
+    const response = await httpClient.post<RegisterUserResponse>(
+      "/auth/register",
+      userData
+    );
+
+    return response.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      if (error.response?.status === 409) {
+        throw new UserAlreadyExistsError();
+      }
+
+      throw new InternalServerError(
+        error.response?.data?.message || "Erro ao criar conta"
+      );
+    }
+
     throw error;
   }
 };
