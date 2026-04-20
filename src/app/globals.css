@@ -222,6 +222,13 @@ h6 {
   * {
     @apply border-border outline-ring/50;
   }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href] {
+    cursor: pointer;
+  }
+
   body {
     @apply bg-background text-foreground;
   }

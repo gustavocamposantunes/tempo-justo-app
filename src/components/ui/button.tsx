@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-brand-action text-white cursor-pointer hover:bg-[#003b22] active:bg-[#00351f] [a]:hover:bg-[#003b22]",
+          "bg-brand-action text-white cursor-pointer hover:opacity-90 active:opacity-100 [a]:hover:opacity-90",
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:

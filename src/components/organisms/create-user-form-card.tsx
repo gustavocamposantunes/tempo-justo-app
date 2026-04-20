@@ -31,7 +31,7 @@ export function CreateUserFormCard() {
     registerUserMutation.mutate(data, {
       onSuccess: () => {
         methods.reset();
-        router.push("/");
+        router.push("/login");
       },
     });
   };
@@ -65,7 +65,7 @@ export function CreateUserFormCard() {
             <p className="pt-1 text-center text-sm text-slate-600">
               Já tem conta?{" "}
               <Link
-                href="/"
+                href="/login"
                 className="font-semibold text-brand-primary transition-colors hover:text-brand-action hover:underline"
               >
                 Entrar

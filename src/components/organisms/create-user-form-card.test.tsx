@@ -88,7 +88,7 @@ describe("CreateUserFormCard", () => {
       );
     });
 
-    expect(pushMock).toHaveBeenCalledWith("/");
+    expect(pushMock).toHaveBeenCalledWith("/login");
   });
 
   it("should render mutation error message", () => {
@@ -107,6 +107,6 @@ describe("CreateUserFormCard", () => {
   it("should render login redirect link", () => {
     render(<CreateUserFormCard />);
 
-    expect(screen.getByRole("link", { name: /entrar/i })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: /entrar/i })).toHaveAttribute("href", "/login");
   });
 });
