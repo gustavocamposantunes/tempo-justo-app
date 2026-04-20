@@ -15,6 +15,13 @@ const meta = {
       ],
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="bg-brand-primary p-6">
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof BrandingWordmark>;
 
 export default meta;
