@@ -23,7 +23,7 @@ export function NameField() {
         placeholder="Seu nome"
         aria-invalid={errors.name ? "true" : "false"}
       />
-      {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
+      {errors.name && <p className="text-sm text-red-600">{errors.name.message}</p>}
     </Field>
   );
 }
