@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Bell, CircleUserRound, Search } from "lucide-react";
 
@@ -42,12 +42,14 @@ export function MarketplaceHeader() {
           <button
             className="inline-flex size-9 items-center justify-center text-white/85 transition-colors hover:bg-white/15 hover:text-white"
             type="button"
+            aria-label="notificação"
           >
             <Bell className="size-4" />
           </button>
           <button
             className="inline-flex size-9 items-center justify-center text-white/85 transition-colors hover:bg-white/15 hover:text-white"
             type="button"
+            aria-label="avatar"
           >
             <CircleUserRound className="size-5" />
           </button>
